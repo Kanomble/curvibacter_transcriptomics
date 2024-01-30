@@ -42,3 +42,8 @@ The rsem-calculate-expression command is a part of the RSEM package. This specif
 ### References
 - [Pietschke et. al. 2017](https://www.pnas.org/doi/10.1073/pnas.1706879114)
 - [Kallisto](https://www.nature.com/articles/nbt.3519)
+
+# TODO's
+- [ ] add deseq2 scripts and description for differential gene expression analysis
+- [ ] add clusterProfiler scripts and description for pathway analysis with DEGs
+- [ ] add References for each software
