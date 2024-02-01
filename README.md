@@ -1,8 +1,9 @@
 # Curvibacter Transcriptomics
 
 <div style="text-align: justify">
-This repository stores all scripts necessary to perform a transcriptome analysis with reads from *Curvibacter* sp. AEP1-3.
+This repository stores all scripts necessary to perform a transcriptome analysis with reads from <i>Curvibacter</i> sp. AEP1-3.
 RNA extraction and sequencing was performed similar to <a href="https://www.pnas.org/doi/10.1073/pnas.1706879114"> Pietschke et. al. 2017 </a>.
+
 
 Trimming and mapping was performed with customized Python 3 scripts, which are located in the scripts directory of this repository.
 The mapping procedure was performed on the HPC-System Hilbert of the Heinrich-Heine-University Düsseldorf.
