@@ -19,7 +19,7 @@ RAW reads have been examined for quality using the FastQC software (Version: v0.
 
 <div style="text-align: justify">
 Trimmed reads were subsequently employed as input for a deduplication procedure conducted by BBMap (Version: 38.96). The deduplication process was executed using the dedupe.sh script. Following deduplication, the reads were reformatted using the reformat.sh script. For detailed program settings, refer to the script: deduplication_curvibacter.py.
-Deduplication was performed due to the warning raised by FASTQC and to remove PCR-artefacts. The trimmed and deduplicated reads were then used as input for a second quality check with FASTQC.
+Deduplication was performed due to the warning raised by FastQC and to remove PCR-artefacts. The trimmed and deduplicated reads were then used as input for a second quality check with FastQC.
 </div>
 
 ## Kallisto read mapping procedure
