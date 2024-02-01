@@ -4,6 +4,7 @@
 This repository stores all scripts necessary to perform a transcriptome analysis with reads from <i>Curvibacter</i> sp. AEP1-3.
 RNA extraction and sequencing was performed similar to <a href="https://www.pnas.org/doi/10.1073/pnas.1706879114"> Pietschke et. al. 2017 </a>.
 <br>
+
 Trimming and mapping was performed with customized Python 3 scripts, which are located in the scripts directory of this repository.
 The mapping procedure was performed on the HPC-System Hilbert of the Heinrich-Heine-University Düsseldorf.
 </div>
@@ -11,7 +12,7 @@ The mapping procedure was performed on the HPC-System Hilbert of the Heinrich-He
 ## Quality Control and Trimming of RAW reads
 
 <div style="text-align: justify">
-RAW reads have been examined for quality using the FASTQC software (Version: v0.11.9). Following the quality assessment, RAW reads were trimmed using the Trimmomatic software (Version: 0.39). For detailed program settings, please refer to the script: trimming_curvibacter.py.
+RAW reads have been examined for quality using the FastQC software (Version: v0.11.9). Following the quality assessment, RAW reads were trimmed using the Trimmomatic software (Version: 0.39). For detailed program settings, please refer to the script: trimming_curvibacter.py.
 </div>
 
 ## Deduplication of trimmed reads
@@ -64,8 +65,14 @@ DESeq2 uses a negative binomial distribution model to account for the inherent o
 </div>
 
 ### References
-- [Pietschke et. al. 2017](https://www.pnas.org/doi/10.1073/pnas.1706879114)
-- [Kallisto](https://www.nature.com/articles/nbt.3519)
+- [Pietschke et. al. 2017](https://www.pnas.org/doi/10.1073/pnas.1706879114) website
+- [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) website
+- [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) website
+- [BBMap](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbmap-guide/) website
+- [RSEM](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-323) paper
+- [STAR](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-323) paper
+- [Kallisto](https://www.nature.com/articles/nbt.3519) paper
+- [DESeq2](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) paper
 
 # TODO's
 - [X] add deseq2 scripts and description for differential gene expression analysis
