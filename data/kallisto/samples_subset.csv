@@ -1,0 +1,7 @@
+ID,sample,treatment
+G1_S11_L001,G1,control
+G2_S12_L001,G2,control
+G3_S13_L001,G3,control
+Hydra1_S14_L001,Hydra1,treated
+Hydra2_S15_L001,Hydra2,treated
+Hydra3_S16_L001,Hydra3,treated
