@@ -61,11 +61,10 @@ The rsem-calculate-expression command is a part of the RSEM package. This specif
 
 ## Differential gene expression analysis with deseq2
 
-<div style="text-align: justify;white-space: pre-line;">
+<div style="text-align: justify;">
 To estimate differentially expressed genes between <i>Curvibacter</i> cells in liquid R2A media and <i>Curvibacter</i> cells living on the host <i>Hydra vulgaris</i>, DESeq2 was used.
 The samples designated as HydraX consist of reads derived from the meta-organism <i>Hydra vulgaris</i>. This implies that within the initial raw read samples, genes from other bacterial colonizers are also present. Mapping those raw reads against the <i>Curvibacter</i> genome results in low read abundances.
-
-
+<br>
 However, DESeq2 performs a normalization procedure to account for differences in sequencing depth between samples. This normalization ensures that the comparisons between samples are not biased by these differences. In addition, DESeq2 estimates the dispersion of counts. Dispersion measures the degree of variability in expression for each gene across samples. Accurate estimation of dispersion is important for determining statistical significance.
 DESeq2 uses a negative binomial distribution model to account for the inherent over-dispersion observed in count data. Unlike a simple Poisson distribution, which assumes that the variance equals the mean, the negative binomial distribution allows for greater flexibility in modeling the variance. Once normalization and dispersion estimation are performed, DESeq2 conducts a statistical test (Wald test) to assess whether the observed differences in gene expression between conditions are statistically significant. This test accounts for both biological variability and technical variability in the data. 
 </div>
