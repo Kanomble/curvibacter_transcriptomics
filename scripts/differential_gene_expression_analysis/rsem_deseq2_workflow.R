@@ -3,11 +3,11 @@ library(tximport)
 library(DEGreport)
 library(writexl)
 
-output_dir = file.path("results/curvibacter/rsem/")
-experiments <- read.csv("data/Curvibacter_rsem/samples.csv")
-files <- file.path("data/Curvibacter_rsem/rsem_results/",
+output_dir = file.path("results/rsem/")
+experiments <- read.csv("data/rsem/samples.csv")
+files <- file.path("data/rsem/rsem_results/",
                    paste0(experiments$ID,".genes.results"))
-                   
+
 names(files) <- experiments$id
 all(file.exists(files))
 sampleTable <- data.frame(condition = factor(experiments$treatment), batch = factor(experiments$batch), sample = experiments$sample)
