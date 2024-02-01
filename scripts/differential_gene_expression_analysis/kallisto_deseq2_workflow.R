@@ -56,7 +56,7 @@ sum(res$padj < 0.1, na.rm=TRUE)
 summary(res)
 resOrdered <- res[order(res$pvalue),]
 write.csv(as.data.frame(resOrdered), 
-          file="condition_treated_results.csv")
+          file="results/kallisto/condition_treated_results.csv")
 plotMA(res, ylim=c(-2,2))
 
 resNorm <- lfcShrink(dds, coef=2, type="normal")
@@ -64,7 +64,7 @@ resNorm <- lfcShrink(dds, coef=2, type="normal")
 xlim <- c(1,1e5); ylim <- c(-3,3)
 plotMA(resNorm, xlim=xlim, ylim=ylim, main="normal")
 
-# check expression strength of specific genes
+# check number of counts for specific genes
 # which(rownames(res) == 'WP_087496557.1')
 plotCounts(dds, gene=which.min(res$padj), intgroup="condition")
 plotCounts(dds, gene=which(rownames(res) == 'WP_087494968.1'), intgroup="condition")
@@ -75,14 +75,12 @@ vsd <- vst(dds, blind=FALSE)
 rld <- rlog(dds, blind=FALSE)
 
 plotPCA(rld, intgroup="condition")
-#head(assay(vsd), 3)
-#ntd <- normTransform(dds)
 degPlot(dds = dds, res = res, n = 6, xs = "condition")
 
 png(file="results/kallisto/volcano_plot_curvibacter_dataset.png",width=800, height=550)
 resOrdered <- res[order(res$pvalue),]
 resOrdered[["id"]] <- row.names(resOrdered)
-show <- as.data.frame(resOrdered[1:10, c("log2FoldChange", "padj","id")])#"id"
+show <- as.data.frame(resOrdered[1:10, c("log2FoldChange", "padj","id")]) # top 10 degs
 degVolcano(resOrdered[,c("log2FoldChange", "padj")],plot_text = show)
 dev.off()
 
@@ -108,9 +106,10 @@ degObj(counts, design, "results/kallisto/degObj_curvibacter.rda")
 library(shiny)
 shiny::runGitHub("lpantano/shiny", subdir="expression")
 
-
+# Checking differential expression for specific genes
 targets <- c('WP_087494995.1','WP_087494990.1','WP_087494996.1','WP_087494997.1')
-#lipidA
+
+# lipidA
 targets <- c('WP_087497042.1',
              'WP_087497043.1',
              'WP_087497454.1',
@@ -120,7 +119,7 @@ targets <- c('WP_087497042.1',
              'WP_087494236.1',
              'WP_087496466.1',
              'WP_087496467.1')
-#coreOligos
+# coreOligos
 targets <- c('WP_087497225.1',
               'WP_232459952.1',
               'WP_232459814.1',
@@ -131,7 +130,7 @@ targets <- c('WP_087497225.1',
               'WP_087496961.1',
               'WP_087496464.1')
 
-#epsCluster
+# epsCluster
 targets <- c('WP_087496564.1',
               'WP_087496563.1',
               'WP_087496562.1',
@@ -143,7 +142,7 @@ targets <- c('WP_087496564.1',
               'WP_087496556.1',
               'WP_087496555.1')
 
-#lacZ Operon
+# lacZ Operon
 targets <- c(
   "WP_087497086.1","WP_087495748.1",
              "WP_087495749.1",
@@ -151,17 +150,18 @@ targets <- c(
              "WP_087495751.1",
              "WP_087495752.1")
 
-#glycosyltransferases cluster 3
+#g lycosyltransferases cluster 3
 targets <- c('WP_087494995.1','WP_087494990.1','WP_087494996.1','WP_087494997.1','WP_087494994.1','WP_087494993.1','WP_087494988.1','WP_087494987.1')
-#additional genes in cluster 3
+
+# additional genes in cluster 3
 targets <- c('WP_087494994.1','WP_087494993.1','WP_087494988.1','WP_087494987.1')
 
 
-#transcription factors
+# transcription factors
 targets <- c("WP_087496040.1","WP_232459820.1","WP_087495013.1","WP_087497330.1","WP_232459930.1", "WP_232460005.1", "WP_087495910.1","WP_087496208.1","WP_087496231.1")
 
 
-#glycosyltransferases cluster 5
+# glycosyltransferases cluster 5
 targets <- c("WP_087496214.1","WP_087496217.1","WP_157673191.1","WP_087496223.1")
 
 tcounts <- t(log2((counts(dds[targets, ], normalized=TRUE, replaced=FALSE)+.5))) %>%
