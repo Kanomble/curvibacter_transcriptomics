@@ -7,6 +7,10 @@ RNA extraction and sequencing was performed similar to <a href="https://www.pnas
 
 Trimming and mapping was performed with customized Python 3 scripts, which are located in the scripts directory of this repository.
 The mapping procedure was performed on the HPC-System Hilbert of the Heinrich-Heine-University Düsseldorf.
+<br>
+Differential gene expression analysis was performed with DESeq2 and custom R scripts on a local desktop computer. For the analysis of the metaorganism, DESeq2 was used to compare normalized read counts from <i>Curvibacter</i> cells in liquid R2A media with those from <i>Curvibacter</i> cells of the host organism <i>Hydra vulgaris</i>.
+Samples of free living <i>Curvibacter</i> in R2A are labelled with a "G" as prefix, whereas samples with reads obtained from the metaorganism are labelled with "Hydra" as prefix. Both prefixes are followed by a number indicating the biological replicate.
+For the analysis of mono-colonizing <i>Curvibacter</i> cells on <i>Hydra vulgaris</i>, please refer to the sample description in BioProject <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA887579">PRJNA887579</a>
 </div>
 
 ## Quality Control and Trimming of RAW reads
@@ -24,7 +28,7 @@ Deduplication was performed due to the warning raised by FastQC and to remove PC
 
 ## Kallisto read mapping procedure
 <div style="text-align: justify">
-The trimmed reads, as well as the trimmed and deduplicated reads, were mapped against the RefSeq genome (GCF_002163715.1) of *Curvibacter* sp. AEP1-3. The mapping procedure was executed using the Kallisto software (Version: 0.45.0).
+The trimmed reads, as well as the trimmed and deduplicated reads, were mapped against the RefSeq genome (GCF_002163715.1) of <i>Curvibacter</i> sp. AEP1-3. The mapping procedure was executed using the Kallisto software (Version: 0.45.0).
 Kallisto utilizes an innovative approach known as pseudoalignment to rapidly determine the compatibility of RNA-seq reads with potential transcripts, rather than aligning each read to a reference genome. This approach significantly speeds up the quantification process while maintaining accuracy.
 
 Before mapping with Kallisto we need to generate an index file, this was done by using following command:
