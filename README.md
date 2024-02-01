@@ -1,14 +1,13 @@
 # Curvibacter Transcriptomics
 
 ## Sample Description
-<div style="text-align: justify">
+<div style="text-align: justify;white-space: pre-line;">
 This repository stores all scripts necessary to perform a transcriptome analysis with reads from <i>Curvibacter</i> sp. AEP1-3.
 RNA extraction and sequencing was performed similar to <a href="https://www.pnas.org/doi/10.1073/pnas.1706879114"> Pietschke et. al. 2017 </a>.
-<br>
 
 Trimming and mapping was performed with customized Python 3 scripts, which are located in the scripts directory of this repository.
 The mapping procedure was performed on the HPC-System Hilbert of the Heinrich-Heine-University Düsseldorf.
-<br>
+
 Differential gene expression analysis was performed with DESeq2 and custom R scripts on a local desktop computer. For the analysis of the metaorganism, DESeq2 was used to compare normalized read counts from <i>Curvibacter</i> cells in liquid R2A media with those from <i>Curvibacter</i> cells of the host organism <i>Hydra vulgaris</i>.
 Samples of free living <i>Curvibacter</i> in R2A are labelled with a "G" as prefix, whereas samples with reads obtained from the metaorganism are labelled with "Hydra" as prefix. Both prefixes are followed by a number indicating the biological replicate.
 For the analysis of mono-colonizing <i>Curvibacter</i> cells on <i>Hydra vulgaris</i>, please refer to the sample description in BioProject <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA887579">PRJNA887579</a>
@@ -70,7 +69,7 @@ However, DESeq2 performs a normalization procedure to account for differences in
 DESeq2 uses a negative binomial distribution model to account for the inherent over-dispersion observed in count data. Unlike a simple Poisson distribution, which assumes that the variance equals the mean, the negative binomial distribution allows for greater flexibility in modeling the variance. Once normalization and dispersion estimation are performed, DESeq2 conducts a statistical test (Wald test) to assess whether the observed differences in gene expression between conditions are statistically significant. This test accounts for both biological variability and technical variability in the data. 
 </div>
 
-### References
+# References
 - [Pietschke et. al. 2017](https://www.pnas.org/doi/10.1073/pnas.1706879114) website
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) website
 - [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic) website
