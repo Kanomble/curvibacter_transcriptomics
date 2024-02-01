@@ -1,5 +1,6 @@
 # Curvibacter Transcriptomics
 
+## Sample Description
 <div style="text-align: justify">
 This repository stores all scripts necessary to perform a transcriptome analysis with reads from <i>Curvibacter</i> sp. AEP1-3.
 RNA extraction and sequencing was performed similar to <a href="https://www.pnas.org/doi/10.1073/pnas.1706879114"> Pietschke et. al. 2017 </a>.
@@ -13,20 +14,21 @@ Samples of free living <i>Curvibacter</i> in R2A are labelled with a "G" as pref
 For the analysis of mono-colonizing <i>Curvibacter</i> cells on <i>Hydra vulgaris</i>, please refer to the sample description in BioProject <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA887579">PRJNA887579</a>
 </div>
 
-## Quality Control and Trimming of RAW reads
+## From RAW-Reads to Read Counts
+### Quality Control and Trimming of RAW reads
 
 <div style="text-align: justify">
 RAW reads have been examined for quality using the FastQC software (Version: v0.11.9). Following the quality assessment, RAW reads were trimmed using the Trimmomatic software (Version: 0.39). For detailed program settings, please refer to the script: trimming_curvibacter.py.
 </div>
 
-## Deduplication of trimmed reads
+### Deduplication of trimmed reads
 
 <div style="text-align: justify">
 Trimmed reads were subsequently employed as input for a deduplication procedure conducted by BBMap (Version: 38.96). The deduplication process was executed using the dedupe.sh script. Following deduplication, the reads were reformatted using the reformat.sh script. For detailed program settings, refer to the script: deduplication_curvibacter.py.
 Deduplication was performed due to the warning raised by FastQC and to remove PCR-artefacts. The trimmed and deduplicated reads were then used as input for a second quality check with FastQC.
 </div>
 
-## Kallisto read mapping procedure
+### Kallisto mapping procedure and read abundance measurements
 <div style="text-align: justify">
 The trimmed reads, as well as the trimmed and deduplicated reads, were mapped against the RefSeq genome (GCF_002163715.1) of <i>Curvibacter</i> sp. AEP1-3. The mapping procedure was executed using the Kallisto software (Version: 0.45.0).
 Kallisto utilizes an innovative approach known as pseudoalignment to rapidly determine the compatibility of RNA-seq reads with potential transcripts, rather than aligning each read to a reference genome. This approach significantly speeds up the quantification process while maintaining accuracy.
@@ -40,7 +42,7 @@ Before mapping with Kallisto we need to generate an index file, this was done by
 For detailed settings of the mapping procedure with Kallisto, please refer to the script: kallisto_procedure_curvibacter.py and/or kallisto_procedure_curvibacter_deduplicated_reads.py.
 </div>
 
-## STAR mapping procedure and RSEM read abundance measurements
+### STAR mapping procedure and RSEM read abundance measurements
 <div style="text-align: justify">
 In addition to the mapping procedure performed with Kallisto, trimmed and deduplicated reads were aligned using the STAR aligner (Version: 2.7.3a), and the resulting alignments were quantified using RSEM (Version: 1.2.31). The mapping and read abundance estimations were conducted using the rsem-calculate-expression command within the RSEM package.
 
