@@ -96,6 +96,9 @@ between conditions are statistically significant. This test accounts for both bi
 variability in the data.
 </div>
 
+The DESeq2 analysis is implemented within two R scripts. One script was used for the Kallisto abundance files (abundance.tsv), the other for the RSEM genes.results files.
+Due to the fact that *Curvibacter* is a bacterial species, isoforms.results files of RSEM have not been used in this analysis step.
+
 # References
 
 - [Pietschke et. al. 2017](https://www.pnas.org/doi/10.1073/pnas.1706879114) website

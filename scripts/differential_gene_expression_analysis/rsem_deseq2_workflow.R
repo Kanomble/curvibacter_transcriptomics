@@ -23,7 +23,7 @@ rownames(sampleTable) <- colnames(txi.rsem$counts)
 
 
 # recommended tximport vignette cmd
-threshold <- 5
+threshold <- 10
 dds <- DESeqDataSetFromTximport(txi.rsem, sampleTable, ~condition)
 
 dds$run <- experiments$replicate
