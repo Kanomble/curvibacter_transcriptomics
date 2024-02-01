@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-def trimming(directory):
+def trimming(directory:str):
     print("[+] Current Working Directory : {}".format(os.getcwd()))
     files = []
     for file in os.listdir(directory):
@@ -36,7 +36,6 @@ def trimming(directory):
             returncode = proc.wait(timeout=2400)  # 40 Minutes
             if(returncode != 0):
                 raise Exception("[-] error during trimming ..")
-                return 1
             else:
                 print("[+] DONE trimming of sample {}".format(sample))
     return 0

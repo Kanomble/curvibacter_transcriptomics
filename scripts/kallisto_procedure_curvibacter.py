@@ -3,7 +3,7 @@ import subprocess
 
 print("[*] Starting quantification of reads with kallisto")
 
-def kallisto_quant(directory):
+def kallisto_quant(directory:str):
     logfile = open(directory + '/kallisto_quant.txt','w')
 
     print("[*] START with dir : {}".format(directory))

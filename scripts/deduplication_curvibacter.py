@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-def deduplication(directory):
+def deduplication(directory:str):
 
     if os.path.isdir(directory) == False:
         print("[-] Directory does not exist!")
@@ -10,6 +10,7 @@ def deduplication(directory):
     if os.path.isdir(directory+"/deduplicated_reads") == False:
         print("[-] Output directory does not exist!")
         return 1
+
     logfileName = directory + "/deduplicated_reads/dedup_logfile.txt"
     logfile = open(logfileName,'w')
     print("[+] Current Working Directory : {}".format(directory))
@@ -47,10 +48,9 @@ def deduplication(directory):
 
             cmd = "~/bbmap/dedupe.sh threads=8 in1={} in2={} out={} ac=f".format(forward_read,reverse_read,output)
             proc = subprocess.Popen(cmd, shell=True)
-            returncode = proc.wait(timeout=2400)  # 40 Minutes
+            returncode = proc.wait(timeout=2400) # 40 Minutes
             if(returncode != 0):
                 raise Exception("[-] error during deduplication ..")
-                return 1
             else:
                 print("[+] DONE deduplication of sample {}".format(sample))
                 logfile.write("done deduplication of sample {}\n".format(sample))
@@ -62,10 +62,9 @@ def deduplication(directory):
 
             cmd = "~/bbmap/reformat.sh threads=8 in={} out1={} out2={}".format(output,dedup_fw_read,dedup_rv_read)
             proc = subprocess.Popen(cmd, shell=True)
-            returncode = proc.wait(timeout=2400)  # 40 Minutes
+            returncode = proc.wait(timeout=2400) # 40 Minutes
             if(returncode != 0):
                 raise Exception("[-] error during reformat..")
-                return 1
             else:
                 print("[+] DONE reformat of sample {}".format(sample))
                 logfile.write("done reformat of sample {}\n".format(sample))

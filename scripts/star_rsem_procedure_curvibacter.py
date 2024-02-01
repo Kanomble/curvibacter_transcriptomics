@@ -1,13 +1,14 @@
 import os
 import subprocess
 
-def get_files(input_directory):
+def get_files(input_directory:str):
 	try:
 		files = os.listdir(input_directory)
 		samples = []
 		for file in files:
 			if file.startswith("dedup_") and file != "dedup_logfile.txt":
-			#dedup_forward_read_G1_S11_L001.fastq.gz
+				# example file name:
+				# dedup_forward_read_G1_S11_L001.fastq.gz
 				sample = file.split("read_")[1].split(".")[0]
 				if sample not in samples:
 					samples.append(sample)
@@ -19,7 +20,7 @@ def get_files(input_directory):
 		print("[-] ERROR fetching samples, with exception: {}".format(e))
 		
 		
-def star_aligning(star_output_dir,input_directory,fastq_files,sample_name):
+def star_aligning(star_output_dir:str, input_directory:str, fastq_files:list):
 	try:
 		logfile = star_output_dir + "star_rsem.log"
 		with open(logfile,"w") as logfile:
@@ -30,7 +31,7 @@ def star_aligning(star_output_dir,input_directory,fastq_files,sample_name):
 				logfile.write("ERROR:STAR-RSEM genome directory does not exist!\n")
 				raise Exception("STAR-RSEM genome directory does not exist!")
 			else:
-				print("[*] Genome directory exists!")
+				print("[*] Genome directory exist!")
 				logfile.write("INFO:genome directory exist\n")
 
 			star_genome_dir = star_genome_dir + "Curvibacter_reference"
@@ -46,7 +47,7 @@ def star_aligning(star_output_dir,input_directory,fastq_files,sample_name):
 
 			logfile.write("INFO:starting alignment procedure\n")
 			print("[*] Starting STAR alignment procedure")
-			for sample in samples:
+			for sample in fastq_files:
 				output_directory_sample = output_directory + sample
 				fw_read = input_directory + "/dedup_forward_read_" + sample + ".fastq.gz"
 				rev_read = input_directory + "/dedup_reverse_read_" + sample + ".fastq.gz"
@@ -76,5 +77,6 @@ def star_aligning(star_output_dir,input_directory,fastq_files,sample_name):
 		print("[-] ERROR during star rsem procedure with exception: {}".format(e))
 
 dirCurvi = "/gpfs/project/lubec100/CuTrOmics/CurvibacterTranscriptome/AEP_TranscriptomicData_RAW/stringent_trimmed_files_final/deduplicated_reads"
+
 samples = get_files(dirCurvi)
-star_aligning("/gpfs/project/lubec100/CuTrOmics/CurvibacterTranscriptome/star_rsem_output/",dirCurvi, samples, "CurvibacterMeta")
+star_aligning("/gpfs/project/lubec100/CuTrOmics/CurvibacterTranscriptome/star_rsem_output/", dirCurvi, samples)

@@ -8,7 +8,7 @@ def kallisto_quant(directory):
 
     print("[*] START with dir : {}".format(directory))
     kallisto_index = "/gpfs/project/lubec100/CuTrOmics/CurvibacterTranscriptome/AEP_Genome_Refseq/curvibacter_kallisto_index"
-    gtf_file = "/gpfs/project/lubec100/CuTrOmics/CurvibacterTranscriptome/AEP_Genome_Refseq/curvibacter_kallisto_index"
+    # gtf_file = "/gpfs/project/lubec100/CuTrOmics/CurvibacterTranscriptome/AEP_Genome_Refseq/curvibacter_kallisto_index"
 
     if os.path.isfile(kallisto_index) == False:
         print("[-] ERROR can't find kallisto index file : {}".format(kallisto_index))
