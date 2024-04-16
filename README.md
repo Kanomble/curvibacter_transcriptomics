@@ -99,6 +99,13 @@ variability in the data.
 The DESeq2 analysis is implemented within two R scripts. One script was used for the Kallisto abundance files (abundance.tsv), the other for the RSEM genes.results files.
 Due to the fact that *Curvibacter* is a bacterial species, isoforms.results files of RSEM have not been used in this analysis step.
 
+## Gene Enrichment Analysis with AnnotationForge and clusterProfiler
+
+With the <i>Curvibacter</i> proteome as input, BLASTKoala was used to identify KeggOntology (KO) identifier for each gene. The GenBank file of <i>Curvibacter</i> was used to extract all GeneOntology (GO) terms for each protein sequence.
+Subsequently, the R package [AnnotationForge](https://bioconductor.org/packages/release/bioc/html/AnnotationForge.html) was used to construct an OrgDb package for <i>Curvibacter</i>. This OrgDb package was used as input for the enrichGO function of the [clusterProfiler](https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html) R package. 
+
+Differentially expressed genes have been filtered for significance (adjusted p-value "padj" <= 0.05). Downregulated genes with an log2FoldChange value of -1 and upregulated genes with an log2FoldChange value of 1 have been used as input for the enrichKEGG and enrichGO functions of the clusterProfiler R package.
+
 # References
 
 - [Pietschke et. al. 2017](https://www.pnas.org/doi/10.1073/pnas.1706879114) website
@@ -109,9 +116,11 @@ Due to the fact that *Curvibacter* is a bacterial species, isoforms.results file
 - [STAR](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-323) paper
 - [Kallisto](https://www.nature.com/articles/nbt.3519) paper
 - [DESeq2](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) paper
-
+- [AnnotationForge](https://bioconductor.org/packages/release/bioc/html/AnnotationForge.html) website
+- [clusterProfiler](https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html) website
+  
 # TODO's
 
 - [X] add deseq2 scripts and description for differential gene expression analysis
-- [ ] add clusterProfiler scripts and description for pathway analysis with DEGs
+- [X] add clusterProfiler scripts and description for pathway analysis with DEGs
 - [ ] add References for each software
