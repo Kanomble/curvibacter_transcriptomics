@@ -2,6 +2,7 @@ library(DESeq2)
 library(tximport)
 library(DEGreport)
 library(writexl)
+library(shiny)
 
 output_dir = file.path("results/rsem/")
 experiments <- read.csv("data/rsem/samples.csv")
@@ -32,27 +33,45 @@ ddsColl <- collapseReplicates(dds, dds$sample, dds$run)
 keep <- rowSums(counts(ddsColl)) >= threshold
 dds <- ddsColl[keep,]
 
-
+# PCA all vs. all
 rld <- rlog(dds, blind=TRUE)
-cat(paste("[*] PRODUCING PCA",file.path(outp,paste0("curvibacter_rsem_pca.png")),"\n"))
-png(file=file.path(outp,paste0("curvibacter_rsem_pca.png")), width=800, height=550)
+cat(paste("[*] PRODUCING PCA",file.path(output_dir,paste0("curvibacter_rsem_pca.png")),"\n"))
+png(file=file.path(output_dir,paste0("curvibacter_rsem_pca.png")), width=800, height=550)
 pca <- plotPCA(rld, intgroup="condition")
+print(pca)
 dev.off()
 
 dds <- DESeq(dds)
 
 counts <- counts(dds, normalized = TRUE)
 design <- as.data.frame(colData(dds))
-degCheckFactors(counts[, 1:6])
+png(file=file.path(output_dir,paste0("curvibacter_rsem_check_factors.png")), width=800, height=550)
+cfactor <- degCheckFactors(counts[, 1:6])
+print(cfactor)
+dev.off()
 
-degQC(counts, design[["condition"]], pvalue = res[["pvalue"]])
-resCov <- degCovariates(log2(counts(dds)+0.5),
-                        colData(dds))
-degPlotWide(dds, rownames(dds)[1:5], group="condition")
-degObj(counts, design, "degObj.rda")
-library(shiny)
-shiny::runGitHub("lpantano/shiny", subdir="expression")
+png(file=file.path(output_dir,paste0("curvibacter_rsem_degQC.png")), width=800, height=550)
+degqc <- degQC(counts, design[["condition"]], pvalue = res[["pvalue"]])
+print(degqc)
+dev.off()
 
+png(file=file.path(output_dir,paste0("curvibacter_rsem_resCov.png")), width=800, height=550)
+resCov <- degCovariates(counts(dds),
+                        colData(dds),addCovDen=TRUE, scale=TRUE)
+print(resCov)
+dev.off()
+
+png(file=file.path(output_dir,paste0("curvibacter_rsem_testCounts.png")), width=800, height=550)
+testCounts <- degPlotWide(dds, rownames(dds)[1:5], group="condition")
+print(testCounts)
+dev.off()
+
+# objects for shiny can be loaded with the runGitHub cmd 
+degObj(counts, design, "results/rsem/degObj.rda")
+#shiny::runGitHub("lpantano/shiny", subdir="expression")
+
+
+# result file and valcona plot creation loop
 for (exp in unique(experiments$treatment)){
   for(nexp in unique(experiments$treatment)){
     if(nexp != exp){
