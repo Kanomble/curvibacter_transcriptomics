@@ -101,7 +101,7 @@ Due to the fact that *Curvibacter* is a bacterial species, isoforms.results file
 
 ## Gene Enrichment Analysis with AnnotationForge and clusterProfiler
 
-With the <i>Curvibacter</i> proteome as input, BLASTKoala was used to identify KeggOntology (KO) identifier for each gene. The GenBank file of <i>Curvibacter</i> was used to extract all GeneOntology (GO) terms for each protein sequence.
+With the <i>Curvibacter</i> proteome as input, BlastKOALA was used to identify KeggOntology (KO) identifier for each gene. The GenBank file of <i>Curvibacter</i> was used to extract all GeneOntology (GO) terms for each protein sequence.
 Subsequently, the R package [AnnotationForge](https://bioconductor.org/packages/release/bioc/html/AnnotationForge.html) was used to construct an OrgDb package for <i>Curvibacter</i>. This OrgDb package was used as input for the enrichGO function of the [clusterProfiler](https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html) R package. 
 
 Differentially expressed genes have been filtered for significance (adjusted p-value "padj" <= 0.05). Downregulated genes with an log2FoldChange value of -1 and upregulated genes with an log2FoldChange value of 1 have been used as input for the enrichKEGG and enrichGO functions of the clusterProfiler R package.
