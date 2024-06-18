@@ -106,6 +106,10 @@ Subsequently, the R package [AnnotationForge](https://bioconductor.org/packages/
 
 Differentially expressed genes have been filtered for significance (adjusted p-value "padj" <= 0.05). Downregulated genes with an log2FoldChange value of -1 and upregulated genes with an log2FoldChange value of 1 have been used as input for the enrichKEGG and enrichGO functions of the clusterProfiler R package.
 
+## Gene Enrichment Analysis with GOATOOLS. 
+
+For the GO-term analysis with GOATOOLS, an association file with gene_id to GO identifier mapping was prepared using the <i>Curvibacter</i> genome GFF file obtained from NCBIs [FTP-Server](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/163/715/GCF_002163715.1_ASM216371v1/). The analysis was conducted on significantly up- and downregulated genes filtered by the adjusted p-value and the log2FoldChange parameters of the differential expression analysis tables. A custom python script was then used to plot the enriched gene sets.
+
 # References
 
 - [Pietschke et. al. 2017](https://www.pnas.org/doi/10.1073/pnas.1706879114) website
@@ -118,9 +122,4 @@ Differentially expressed genes have been filtered for significance (adjusted p-v
 - [DESeq2](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) paper
 - [AnnotationForge](https://bioconductor.org/packages/release/bioc/html/AnnotationForge.html) website
 - [clusterProfiler](https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html) website
-  
-# TODO's
-
-- [X] add deseq2 scripts and description for differential gene expression analysis
-- [X] add clusterProfiler scripts and description for pathway analysis with DEGs
-- [ ] add References for each software
+- [GOATOOLS](https://www.nature.com/articles/s41598-018-28948-z)
