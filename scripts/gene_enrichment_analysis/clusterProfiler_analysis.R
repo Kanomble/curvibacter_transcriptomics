@@ -23,7 +23,13 @@ merged_df <- merge(merged_df, ko_mapping_df, by="protein_id")
 
 # genes upregulated on host
 upregulated <- merged_df[merged_df$log2FoldChange <= -1, ]
+
+# writing upregulated into file
+combined <- cbind(upregulated[upregulated$ko != "", ]$protein_id, upregulated[upregulated$ko != "", ]$ko)
+write.csv(combined, "results/gene_enrichment_analysis/upregulated_kegg_ids.txt")
+
 kegg_enrich_result <- enrichKEGG(gene = upregulated$ko, universe = ko_universe, organism = 'ko')
+write.csv(kegg_enrich_result@result,"results/gene_enrichment_analysis/kegg_enrich_upregulated.csv")
 
 png(file=file.path(output_dir,paste0("curvibacter_kegg_upregulated_on_host.png")), width=800, height=550)
 dotplot <- dotplot(kegg_enrich_result, showCategory=20)
@@ -40,10 +46,31 @@ dev.off()
 # genes downregulated on host
 downregulated <- merged_df[merged_df$log2FoldChange >= 1, ]
 kegg_enrich_result <- enrichKEGG(gene = downregulated$ko, universe = ko_universe, organism = 'ko')
+
+write.csv(kegg_enrich_result@result,"results/gene_enrichment_analysis/kegg_enrich_downregulated.csv")
+
+
 png(file=file.path(output_dir,paste0("curvibacter_kegg_downregulated_on_host.png")), width=800, height=550)
 dotplot <- dotplot(kegg_enrich_result, showCategory=20)
 print(dotplot)
 dev.off()
+
+
+upregulated <- merged_df[merged_df$log2FoldChange <= -1, ]
+highly_upregulated <- merged_df[merged_df$log2FoldChange <= -3, ]
+
+
+go_enrich_result_highly_up <- enrichGO(gene=highly_upregulated$old_locus_tag, OrgDb="org.CAEP13.eg.db", ont="ALL", keyType = "GID")
+go_enrich_result_up <- enrichGO(gene=upregulated$old_locus_tag, OrgDb="org.CAEP13.eg.db", ont="ALL", keyType = "GID")
+
+result_list <- list(highly_up=go_enrich_result_highly_up, normal_upregulated=go_enrich_result_up)
+go_enrich_result <- merge_result(result_list)
+
+png(file=file.path(output_dir,paste0("highly_upregulated_go.png")), width=800, height=550)
+dotplot <- dotplot(go_enrich_result, showCategory=20)
+print(dotplot)
+dev.off()
+
 
 go_enrich_result <- enrichGO(gene=downregulated$old_locus_tag, OrgDb="org.CAEP13.eg.db", ont="ALL", keyType = "GID")
 
