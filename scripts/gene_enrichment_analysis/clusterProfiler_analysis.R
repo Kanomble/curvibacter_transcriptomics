@@ -21,6 +21,39 @@ merged_df <- merge(deseq_df, translation_table, by = "old_locus_tag")
 # get KO numbers for all WP identifier
 merged_df <- merge(merged_df, ko_mapping_df, by="protein_id")
 
+# symbiotic genes
+symbiotic_genes <- read.csv("./results/gene_enrichment_analysis/symbiotic_genes/merged_translation_table.csv")
+symbiotic_merged <- merge(symbiotic_genes, ko_mapping_df, by="protein_id")
+
+transcriptome_symbiotic_merged_df <- merge(symbiotic_genes,merged_df,by="protein_id")
+up_sym <- transcriptome_symbiotic_merged_df[transcriptome_symbiotic_merged_df$log2FoldChange <= -1, ]
+down_sym <- transcriptome_symbiotic_merged_df[transcriptome_symbiotic_merged_df$log2FoldChange >= 1, ]
+
+kegg_enrich_result <- enrichKEGG(gene = symbiotic_merged$ko, universe = ko_universe, organism = 'ko')
+write.csv(kegg_enrich_result@result,"results/gene_enrichment_analysis/kegg_enrich_symbiotic.csv")
+
+png(file=file.path(output_dir,paste0("curvibacter_kegg_symbiotic.png")), width=800, height=550)
+dotplot <- dotplot(kegg_enrich_result, showCategory=20)
+print(dotplot)
+dev.off()
+
+kegg_enrich_result <- enrichKEGG(gene = up_sym$ko, universe = ko_universe, organism = 'ko')
+write.csv(kegg_enrich_result@result,"results/gene_enrichment_analysis/kegg_enrich_up_symbiotic.csv")
+
+png(file=file.path(output_dir,paste0("curvibacter_kegg_up_symbiotic.png")), width=800, height=550)
+dotplot <- dotplot(kegg_enrich_result, showCategory=20)
+print(dotplot)
+dev.off()
+
+kegg_enrich_result <- enrichKEGG(gene = down_sym$ko, universe = ko_universe, organism = 'ko')
+write.csv(kegg_enrich_result@result,"results/gene_enrichment_analysis/kegg_enrich_down_symbiotic.csv")
+
+png(file=file.path(output_dir,paste0("curvibacter_kegg_down_symbiotic.png")), width=800, height=550)
+dotplot <- dotplot(kegg_enrich_result, showCategory=20)
+print(dotplot)
+dev.off()
+
+
 # genes upregulated on host
 upregulated <- merged_df[merged_df$log2FoldChange <= -1, ]
 
