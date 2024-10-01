@@ -102,11 +102,11 @@ Due to the fact that *Curvibacter* is a bacterial species, isoforms.results file
 ## Gene Enrichment Analysis with AnnotationForge and clusterProfiler
 
 With the <i>Curvibacter</i> proteome as input, BlastKOALA was used to identify KeggOntology (KO) identifier for each gene. The GenBank file of <i>Curvibacter</i> was used to extract all GeneOntology (GO) terms for each protein sequence.
-Subsequently, the R package [AnnotationForge](https://bioconductor.org/packages/release/bioc/html/AnnotationForge.html) was used to construct an OrgDb package for <i>Curvibacter</i>. This OrgDb package was used as input for the enrichGO function of the [clusterProfiler](https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html) R package. 
+Subsequently, the R package [AnnotationForge](https://bioconductor.org/packages/release/bioc/html/AnnotationForge.html) was used to construct an OrgDb package for <i>Curvibacter</i>. This OrgDb package was used as input for the enrichGO function of the [clusterProfiler](https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html) R package.
 
-Differentially expressed genes have been filtered for significance (adjusted p-value "padj" <= 0.05). Downregulated genes with an log2FoldChange value of -1 and upregulated genes with an log2FoldChange value of 1 have been used as input for the enrichKEGG and enrichGO functions of the clusterProfiler R package.
+Differentially expressed genes have been filtered for significance (adjusted p-value "padj" <= 0.05). Downregulated genes with an log2FoldChange value of <= -1 and upregulated genes with an log2FoldChange value of >= 1 have been used as input for the enrichKEGG and enrichGO functions of the clusterProfiler R package.
 
-## Gene Enrichment Analysis with GOATOOLS. 
+## Gene Enrichment Analysis with GOATOOLS.
 
 For the GO-term analysis with GOATOOLS, an association file with gene_id to GO identifier mapping was prepared using the <i>Curvibacter</i> genome GFF file obtained from NCBIs [FTP-Server](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/163/715/GCF_002163715.1_ASM216371v1/). The analysis was conducted on significantly up- and downregulated genes filtered by the adjusted p-value and the log2FoldChange parameters of the differential expression analysis tables. A custom python script was then used to plot the enriched gene sets.
 
